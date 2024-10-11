@@ -2,7 +2,16 @@
     // Base de datos
 
     require '../../includes/config/database.php';
-    conectarDB();
+    $db = conectarDB();
+    
+    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        echo "<pre>";
+        var_dump($_POST);
+        echo "</pre>";
+
+        $titulo = $_POST['titulo'];
+        $precio = $_POST['precio'];
+    }
 
     require '../../includes/funciones.php';    
     incluirTemplate('header');
