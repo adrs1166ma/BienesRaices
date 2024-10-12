@@ -21,10 +21,16 @@
 
     // Ejecutar el código después de que el usuario envia el formulario 
     if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        
         //echo "<pre>";
         //var_dump($_POST);
         //echo "</pre>";
+        
+        //echo "<pre>";
+        //var_dump($_FILES);
+        //echo "</pre>";
 
+        
         $titulo = mysqli_real_escape_string( $db,  $_POST['titulo'] );
         $precio = mysqli_real_escape_string( $db,  $_POST['precio'] );
         $descripcion = mysqli_real_escape_string( $db,  $_POST['descripcion'] );
@@ -33,6 +39,10 @@
         $estacionamiento = mysqli_real_escape_string( $db,  $_POST['estacionamiento'] );
         $vendedorId = mysqli_real_escape_string( $db,  $_POST['vendedor'] );
         $creado = date('Y/m/d');
+        
+        // Asignar files hacia una variable
+        $imagen = $_FILES['imagen'];
+        
 
 
         if(!$titulo) {
@@ -61,6 +71,18 @@
         
         if(!$vendedorId) {
             $errores[] = 'Elige un vendedor';
+        }
+
+        if(!$imagen['name'] || $imagen['error']) {
+            $errores[] = 'La imagen es Obligatoria';
+        }
+
+        // Validar por tamaño (1mb máximo)
+        $medida = 1000 * 100;
+
+
+        if($imagen['size'] > $medida ) {
+            $errores[] = 'La Imagen es muy pesada';
         }
 
         // echo "<pre>";
