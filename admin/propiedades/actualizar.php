@@ -89,14 +89,8 @@
             $errores[] = 'Elige un vendedor';
         }
 
-        if(!$imagen['name'] || $imagen['error']) {
-            $errores[] = 'La imagen es Obligatoria';
-        }
-
         // Validar por tamaño (1mb máximo)
         $medida = 1000 * 1000;
-
-
         if($imagen['size'] > $medida ) {
             $errores[] = 'La Imagen es muy pesada';
         }
@@ -110,27 +104,29 @@
         
         if(empty($errores)) {
 
-            /** SUBIDA DE ARCHIVOS */
+            // /** SUBIDA DE ARCHIVOS */
 
-            // Crear carpeta
-            $carpetaImagenes = '../../imagenes/';
+            // // Crear carpeta
+            // $carpetaImagenes = '../../imagenes/';
 
-            if(!is_dir($carpetaImagenes)) {
-                mkdir($carpetaImagenes);
-            }
+            // if(!is_dir($carpetaImagenes)) {
+            //     mkdir($carpetaImagenes);
+            // }
 
-            // Generar un nombre único
-            $nombreImagen = md5( uniqid( rand(), true ) ) . ".jpg" ;
+            // // Generar un nombre único
+            // $nombreImagen = md5( uniqid( rand(), true ) ) . ".jpg" ;
 
 
-            // Subir la imagen
-            move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen );
+            // // Subir la imagen
+            // move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen );
 
             
 
             // Insertar en la base de datos
-            $query = " INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedorId ) VALUES ( '$titulo', '$precio', '$nombreImagen', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedorId' ) ";
-            //echo $query;
+            $query = " UPDATE propiedades SET titulo = '${titulo}', precio = '${precio}', descripcion = '${descripcion}', habitaciones = ${habitaciones}, wc = ${wc}, estacionamiento = ${estacionamiento}, vendedorId = ${vendedorId} WHERE id = ${id} ";
+
+            // echo $query;
+            
 
             $resultado = mysqli_query($db, $query);
 
@@ -161,7 +157,7 @@
             </div>
         <?php endforeach; ?>
     
-        <form class="formulario" method="POST" action="/admin/propiedades/crear.php" enctype="multipart/form-data">
+        <form class="formulario" method="POST" enctype="multipart/form-data">
             <fieldset>
                 <legend>Información General</legend>
 
