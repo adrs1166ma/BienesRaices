@@ -1,0 +1,17 @@
+{
+    "name": "adrsn/bienesraices",
+    "description": "Creando un proyecto con POO",
+    "type": "project",
+    "authors": [
+        {
+            "name": "adrs1166ma",
+            "email": "163654808+adrs1166ma@users.noreply.github.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\" : "./classes" 
+        }
+    }
+}
