@@ -3,17 +3,9 @@
     require '../../includes/app.php';    
 
     use App\Propiedad;
-    $propiedad = new Propiedad;
 
-    echo "<pre>";
-    var_dump($propiedad);
-    echo "</pre>";
 
-    exit;
-    $auth = estaAutenticado();
-    if(!$auth) {
-        header('Location: /');
-    }
+    estaAutenticado();
     
     $db = conectarDB();
 
