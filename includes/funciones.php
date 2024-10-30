@@ -24,6 +24,11 @@ function debuguear($variable) {
     exit;
 }
 
+// Escapa el del HTML
+function s($html) : string {
+    $s = htmlspecialchars($html);
+    return $s;
+}
 
 // Funcion si se usa en el subdirectorio APACHE 🪶
 function obtenerNombreDirectorioTrabajo(string $ruta){
