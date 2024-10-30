@@ -32,7 +32,7 @@ class Propiedad {
         $this->id = $args['id'] ?? null;
         $this->titulo = $args['titulo'] ?? '';
         $this->precio = $args['precio'] ?? '';
-        $this->imagen = $args['imagen'] ?? 'imagen.jpg';
+        $this->imagen = $args['imagen'] ?? '';
         $this->descripcion = $args['descripcion'] ?? '';
         $this->habitaciones = $args['habitaciones'] ?? '';
         $this->wc = $args['wc'] ?? '';
@@ -55,7 +55,7 @@ class Propiedad {
 
         $resultado = self::$db->query($query);
 
-        debuguear($resultado);
+        return $resultado;
     }
 
     // Identificar y unir los atributos de la BD
@@ -76,6 +76,13 @@ class Propiedad {
             $sanitizado[$key] = self::$db->escape_string($value);
         }
         return $sanitizado;
+    }
+    // Subida de Archivos
+    public function setImagen($imagen) {
+        // Asignar al atributo de imagen el nombre de la imagen
+        if ($imagen) {
+            $this->imagen = $imagen;
+        }
     }
 
     // Validacion
@@ -113,17 +120,9 @@ class Propiedad {
             self::$errores[] = 'Elige un vendedor';
         }
 
-        // if(!$this->imagen['name'] || $this->imagen['error']) {
-        //     $errores[] = 'La imagen es Obligatoria';
-        // }
-
-        // // Validar por tamaño (1mb máximo)
-        // $medida = 1000 * 1000;
-
-
-        // if($this->imagen['size'] > $medida ) {
-        //     $errores[] = 'La Imagen es muy pesada';
-        // }
+        if(!$this->imagen) {
+            self::$errores[] = 'La imagen es Obligatoria';
+        }
 
         return self::$errores;
     }
