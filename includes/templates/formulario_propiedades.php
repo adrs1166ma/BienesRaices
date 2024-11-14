@@ -37,7 +37,7 @@
 
     <label for="estacionamiento">Estacionamiento:</label>
     <input type="number" id="estacionamiento" name="propiedad[estacionamiento]" placeholder="Ej: 3" min="1" max="9" 
-    value="<?php echo s($propiedades->estacionamiento); ?>">
+    value="<?php echo s($propiedad->estacionamiento); ?>">
 
 </fieldset>
 
