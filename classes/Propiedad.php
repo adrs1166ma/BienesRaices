@@ -42,7 +42,7 @@ class Propiedad {
     }
 
     public function guardar(){
-        if(isset($this->id)){
+        if(!is_null($this->id)){
             // actualizar
             $this->actualizar();
         } else {
@@ -64,7 +64,11 @@ class Propiedad {
 
         $resultado = self::$db->query($query);
 
-        return $resultado;
+        //Mensaje de exito
+        if ($resultado){
+            // Redireccionar al usuario.
+            header('Location: /admin?resultado=1');
+        }
     }
 
     public function actualizar(){
